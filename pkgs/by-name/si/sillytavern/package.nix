@@ -117,7 +117,7 @@ buildNpmPackage rec {
     downloadPage = "https://github.com/SillyTavern/SillyTavern/releases";
     homepage = "https://docs.sillytavern.app/";
     mainProgram = "sillytavern";
-    license = licenses.agpl3;
+    license = licenses.gpl3;
     maintainers = [ maintainers.aikooo7 ];
   };
 }
