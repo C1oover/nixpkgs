@@ -65,7 +65,7 @@ buildNpmPackage rec {
     owner = "SillyTavern";
     repo = "SillyTavern";
     rev = "${version}";
-    hash = "sha256-ErTDqn/PhoempJvOIcPHTcT2jEpCJxnRbUW/4tos94M=";
+    hash = "sha256-L9cJcRKow7VVu/NJlCIL4NseJJkzI+rOb6Qi4KXbb64=";
   };
 
   npmDepsHash = "sha256-InOI5A6NuuMpadH5KIJUDPisvN2gjXxZonpo0Y/V8RA=";
