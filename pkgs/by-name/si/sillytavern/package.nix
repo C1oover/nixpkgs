@@ -60,7 +60,7 @@ in
 
 buildNpmPackage rec {
   pname = "sillytavern";
-  version = "1.12.0";
+  version = "1.12.0-preview";
   src = fetchFromGitHub {
     owner = "SillyTavern";
     repo = "SillyTavern";
