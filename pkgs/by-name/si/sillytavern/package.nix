@@ -50,7 +50,7 @@ trap fusecleanup 1 2 3 6 15
   cd "$_config_dir/opt"
   echo "Starting SillyTavern..."
 
-  ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir/data
+  ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir/data --disableCsrf 
 
   fusecleanup
 '';
