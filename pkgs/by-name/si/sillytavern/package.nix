@@ -74,7 +74,7 @@ buildNpmPackage rec {
 
   dontNpmBuild = true;
 
-  nodejs = pkgs.nodejs_20
+  nodejs = pkgs.nodejs_20;
 
   nativeBuildInputs = [ makeWrapper ];
 
