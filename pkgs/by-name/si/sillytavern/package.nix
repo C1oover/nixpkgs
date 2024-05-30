@@ -5,7 +5,7 @@
 , pkgs
 }:
 
-let 
+let
 wrapperScript = pkgs.writeShellScriptBin "sillytavern-wrapper" ''
   _name="sillytavern"
   _BUILDLIBPREFIX="$(dirname "$(readlink -f "$0")")/../lib/sillytavern"
@@ -14,15 +14,49 @@ wrapperScript = pkgs.writeShellScriptBin "sillytavern-wrapper" ''
   _yellow_color_code="\33[2K\r\033[1;33m%s\033[0m\n\33[2K\r\033[1;33m%s\033[0m\n"
   export NODE_PATH="$_BUILDLIBPREFIX/node_modules"
 
+  fusecleanup()
+  {
+    if ${pkgs.mount}/bin/mount | ${pkgs.gnugrep}/bin/grep -q "$_config_dir/opt"; then
+      echo "Cleaning up fusemount"
+      fusermount -zu "$_config_dir/opt"
+    fi
+  }
+
+trap fusecleanup 1 2 3 6 15
+
+  mkdir -p "$_config_dir/opt" "$_config_dir/optdiff"
+  fusecleanup
+  echo "Fuse mounting of $_config_dir/optdiff and $_SHAREPREFIX to $_config_dir/opt"
+  ${pkgs.unionfs-fuse}/bin/unionfs -o cow -o umask=000 $_SHAREPREFIX=ro:$_config_dir/optdiff=rw $_config_dir/opt|| exit 1
+
+  printf $_yellow_color_code "If automatic unmounting fails, run this command:" "fusermount -zu $_config_dir/opt" >&2
+
+  if [ ! -d $_config_dir/optdiff/public/user/images/ ]; then
+    echo "Creating $_config_dir/optdiff/public/user/images/"
+    mkdir -p $_config_dir/optdiff/public/user/images/
+  fi
+
+  if [ ! -d $_config_dir/optdiff/default/ ]; then
+    echo "Creating $_config_dir/optdiff/default/"
+    mkdir -p $_config_dir/optdiff/default/
+  fi
+
+  cp -R $_SHAREPREFIX/publicc/* $_config_dir/optdiff/public
+  cp -R $_SHAREPREFIX/defaultt/* $_config_dir/optdiff/default
+
+  chmod +rw -R $_config_dir/optdiff
+
   echo "Entering SillyTavern..."
-  cd "$_SHAREPREFIX"
+  cd "$_config_dir/opt"
   echo "Starting SillyTavern..."
 
-  ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir
+  ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir/data
 
+  fusecleanup
 '';
 
-in 
+in
+
 
 buildNpmPackage rec {
   pname = "sillytavern";
