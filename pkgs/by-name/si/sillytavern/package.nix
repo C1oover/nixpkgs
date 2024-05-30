@@ -60,7 +60,7 @@ in
 
 buildNpmPackage rec {
   pname = "sillytavern";
-  version = "1.12.0";
+  version = "1.11.6";
   src = fetchFromGitHub {
     owner = "SillyTavern";
     repo = "SillyTavern";
@@ -74,7 +74,7 @@ buildNpmPackage rec {
 
   dontNpmBuild = true;
 
-  nodejs = pkgs.nodejs_20;
+  #nodejs = pkgs.nodejs_20;
 
   nativeBuildInputs = [ makeWrapper ];
 
