@@ -68,7 +68,7 @@ buildNpmPackage rec {
     hash = "sha256-q63k7TNaGJEX4OQu4TNN06SfynI4vmpFHl5Dt5X11ms=";
   };
 
-  npmDepsHash = "sha256-l142dONvY743+xEV/Ris/elLYh878/BjbJPW1zyY8M4=";
+  npmDepsHash = "sha256-gHQMxoAz5yJkpka2qcZiGedL9eRyjpoEPvbvqK45iSE=";
 
   desktopFile = ./sillytavern.desktop;
 
