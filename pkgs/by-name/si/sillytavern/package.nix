@@ -60,15 +60,15 @@ in
 
 buildNpmPackage rec {
   pname = "sillytavern";
-  version = "1.12.0-preview";
+  version = "1.11.5";
   src = fetchFromGitHub {
     owner = "SillyTavern";
     repo = "SillyTavern";
     rev = "${version}";
-    hash = "sha256-q63k7TNaGJEX4OQu4TNN06SfynI4vmpFHl5Dt5X11ms=";
+    hash = "sha256-ErTDqn/PhoempJvOIcPHTcT2jEpCJxnRbUW/4tos94M=";
   };
 
-  npmDepsHash = "sha256-gHQMxoAz5yJkpka2qcZiGedL9eRyjpoEPvbvqK45iSE=";
+  npmDepsHash = "sha256-InOI5A6NuuMpadH5KIJUDPisvN2gjXxZonpo0Y/V8RA=";
 
   desktopFile = ./sillytavern.desktop;
 
