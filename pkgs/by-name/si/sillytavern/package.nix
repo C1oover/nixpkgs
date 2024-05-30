@@ -20,7 +20,9 @@ wrapperScript = pkgs.writeShellScriptBin "sillytavern-wrapper" ''
 
   ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir
 
-''
+'';
+
+in 
 
 buildNpmPackage rec {
   pname = "sillytavern";
