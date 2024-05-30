@@ -52,7 +52,6 @@ trap fusecleanup 1 2 3 6 15
 
   ${pkgs.nodejs}/bin/node ./server.js --dataRoot $config_dir/data --disableCsrf 
 
-  fusecleanup
 '';
 
 in
